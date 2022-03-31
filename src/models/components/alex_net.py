@@ -38,12 +38,10 @@ class AlexNet(nn.Module):
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=3, stride=2),  # 13x13x256 -> 6x6x256
         )
-        # -- fully connected layers
+        # -- fully connected layers, with no dropout
         self.fc_layer = nn.Sequential(
-            nn.Dropout(p=0.5),
             nn.Linear(256 * 6 * 6, 4096),
             nn.ReLU(),  # for non-linearity
-            nn.Dropout(p=0.5),  # use dropout to avoid overfitting
             nn.Linear(4096, 4096),
             nn.ReLU(),
             nn.Linear(4096, num_classes),
