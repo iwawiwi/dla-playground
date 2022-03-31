@@ -4,8 +4,8 @@
 # python train.py experiment=example
 
 defaults:
-  - override /datamodule: flower102.yaml
-  - override /model: flower102.yaml
+  - override /datamodule: cifar10.yaml
+  - override /model: cifar10_alexnet.yaml
   - override /callbacks: default.yaml
   - override /logger: null
   - override /trainer: default.yaml
@@ -20,6 +20,7 @@ seed: 12345
 
 # override default trainer
 trainer:
-  min_epochs: 10
-  max_epochs: 10
-  gradient_clip_val: 0.5
+  gpus: 1
+  min_epochs: 1
+  max_epochs: 5
+  #gradient_clip_val: 0.5

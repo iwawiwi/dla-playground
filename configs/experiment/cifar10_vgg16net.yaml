@@ -4,8 +4,8 @@
 # python train.py experiment=example
 
 defaults:
-  - override /datamodule: flower102.yaml
-  - override /model: flower102.yaml
+  - override /datamodule: cifar10.yaml
+  - override /model: cifar10_vgg16net.yaml
   - override /callbacks: default.yaml
   - override /logger: null
   - override /trainer: default.yaml
@@ -14,12 +14,13 @@ defaults:
 # this allows you to overwrite only specified parameters
 
 # name of the run determines folder name in logs
-name: "alexnet"
+name: "mini_vgg_net"
 
 seed: 12345
 
 # override default trainer
 trainer:
-  min_epochs: 10
-  max_epochs: 10
-  gradient_clip_val: 0.5
+  gpus: 1
+  min_epochs: 5
+  max_epochs: 100
+  #gradient_clip_val: 0.5

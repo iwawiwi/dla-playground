@@ -1,8 +1,0 @@
-_target_: src.models.flowers102_module.Flowers102LitModule
-lr: 0.01
-weight_decay: 0.0005
-
-net:
-  _target_: src.models.components.alex_net.AlexNet
-  in_channel: 3
-  num_classes: 102
