@@ -149,3 +149,6 @@ logs/
 wandb/
 .env
 .autoenv
+
+# lightning logs dir
+*/lightning_logs
