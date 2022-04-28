@@ -1,0 +1,16 @@
+_target_: src.models.imeasy_module.ImageClassifierModule
+
+net:
+  _target_: src.models.components.simple_conv_net.MyConvNet
+  img_size: 32
+  img_channel: 3
+  num_classes: 10
+
+optimizer:
+  name: "adam"
+  lr: 0.01
+  #momentum: 0.9
+  weight_decay: 0.0005
+
+criterion:
+  _target_: torch.nn.CrossEntropyLoss
