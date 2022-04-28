@@ -118,17 +118,18 @@ class Flowers102LitModule(LightningModule):
         See examples here:
             https://pytorch-lightning.readthedocs.io/en/latest/common/lightning_module.html#configure-optimizers
         """
-        if self.hparams.optimizer == "adam":
+        if self.hparams.optimizer["name"] == "adam":
             optimizer = torch.optim.Adam(
-                self.parameters(),
+                self.net.parameters(),
                 lr=self.hparams.lr,
                 weight_decay=self.hparams.weight_decay,
             )
-        elif self.hparams.optimizer == "sgd":
+        elif self.hparams.optimizer["name"] == "sgd":
             optimizer = torch.optim.SGD(
-                self.parameters(),
+                self.net.parameters(),
                 lr=self.hparams.lr,
                 weight_decay=self.hparams.weight_decay,
+                momentum=self.hparams.optimizer["momentum"],
             )
 
         return optimizer

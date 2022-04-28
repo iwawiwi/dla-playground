@@ -10,4 +10,5 @@ net:
 criterion:
   _target_: torch.nn.CrossEntropyLoss
 
-optimizer: "adam"
+optimizer:
+  name: "adam"

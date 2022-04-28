@@ -19,8 +19,8 @@ name: "google_net"
 seed: 2804
 
 trainer:
-  min_epochs: 10
-  max_epochs: 10
+  min_epochs: 50
+  max_epochs: 100
   gradient_clip_val: 0.5
 
 model:
@@ -28,6 +28,9 @@ model:
   net:
     _target_: src.models.components.google_net.GoogleNet
     num_classes: 102
+  optimizer:
+    name: "sgd"
+    momentum: 0.9
 
 datamodule:
   rsz_size: 224 # match googlenet input size
