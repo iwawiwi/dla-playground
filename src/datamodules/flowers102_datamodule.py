@@ -26,6 +26,7 @@ class Flowers102DataModule(LightningDataModule):
     def __init__(
         self,
         data_dir: str = "data/",
+        rsz_size: int = 227,  # resize to 227x227 for AlexNet
         batch_size: int = 64,
         num_workers: int = 4,
         pin_memory: bool = False,
@@ -39,7 +40,7 @@ class Flowers102DataModule(LightningDataModule):
         self.transform_fn = transforms.Compose(
             [
                 transforms.ToTensor(),
-                transforms.Resize((227, 227)),  # resize to 227x227 for AlexNet
+                transforms.Resize((rsz_size, rsz_size)),
             ]
         )
 

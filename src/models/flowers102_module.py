@@ -24,7 +24,9 @@ class Flowers102LitModule(LightningModule):
 
     def __init__(
         self,
-        net: AlexNet,  # default using alexnet
+        net: torch.nn.Module,
+        criterion,
+        optimizer: str,
         lr: float = 0.001,
         weight_decay: float = 0.0005,
     ):
@@ -37,7 +39,7 @@ class Flowers102LitModule(LightningModule):
         self.net = net
 
         # loss function
-        self.criterion = torch.nn.CrossEntropyLoss()
+        self.criterion = criterion
 
         # use separate metric instance for train, val and test step
         # to ensure a proper reduction over the epoch
@@ -116,6 +118,17 @@ class Flowers102LitModule(LightningModule):
         See examples here:
             https://pytorch-lightning.readthedocs.io/en/latest/common/lightning_module.html#configure-optimizers
         """
-        return torch.optim.Adam(
-            params=self.parameters(), lr=self.hparams.lr, weight_decay=self.hparams.weight_decay
-        )
+        if self.hparams.optimizer == "adam":
+            optimizer = torch.optim.Adam(
+                self.parameters(),
+                lr=self.hparams.lr,
+                weight_decay=self.hparams.weight_decay,
+            )
+        elif self.hparams.optimizer == "sgd":
+            optimizer = torch.optim.SGD(
+                self.parameters(),
+                lr=self.hparams.lr,
+                weight_decay=self.hparams.weight_decay,
+            )
+
+        return optimizer
